@@ -6,16 +6,18 @@ import cors from 'cors'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import expressJwt from 'express-jwt'
-import * as path from 'path';
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+
+const require = createRequire(import.meta.url);
+const path = require('path')
+const __dirname = fileURLToPath(import.meta.url);
 
 const app = express();
-const dbName = process.env.DB_NAME || 'buensabor';
-const dbUsername = process.env.DB_USER || 'root';
-const dbPassword = process.env.DB_PW || '';
+const dbName = 'buensabor';
+const dbUsername =  'root';
+const dbPassword =  '';
 const port = process.env.PORT || 5000;
-
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../frontend/build')))
 
 const makeAbm = (app, ruta, entidad, atributos, include) => {
     Helper.get(app, ruta, entidad, include);
@@ -27,24 +29,24 @@ const makeAbm = (app, ruta, entidad, atributos, include) => {
 app.use(bodyParser.json());
 app.use(cors());
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, 'frontend/build')))
+app.use(express.static(path.join(__dirname, '../frontend/build')))
 app.listen(port, () => console.log(`El buen sabor corriendo en el puerto ${port}!`));
 
 //Configuracion de sequelize
 let sequelize;
 
 if (process.env.JAWSDB_URL) {
-    console.log("Usando db "+ process.env.JAWSDB_URL);
-    let sequelize = new Sequelize(process.env.JAWSDB_URL);
-}else{
+    console.log("Usando db " + process.env.JAWSDB_URL);
+    sequelize = new Sequelize(process.env.JAWSDB_URL);
+} else {
     console.log("Usando db Localhost");
-    let sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
+    sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
         host: "localhost",
         dialect: 'mysql',
         logging: false
     });
 }
-
+console.log(sequelize)
 sequelize.authenticate().then(() => {
     console.log("Conectado a la base de datos con exito!");
 }).catch((e) => {
@@ -398,7 +400,7 @@ app.get('/pedido/:id', (req, res) => {
 // AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/frontend/build/index.html'))
-  })
+})
 
 
 
