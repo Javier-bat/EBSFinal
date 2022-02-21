@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "proxy": "http://localhost:5000",
   "scripts": {
-    "ng": "npm run ng",
-    "start": "npm run ng serve",
-    "build": "npm run ng build",
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
