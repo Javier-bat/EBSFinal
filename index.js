@@ -25,7 +25,7 @@ app.use(cors());
 app.listen(port, () => console.log(`El buen sabor corriendo en el puerto ${port}!`));
 //Configuracion de sequelize
 let sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
-    host: 'localhost',
+    host: process.env.DATABASE_URL || "localhost",
     dialect: 'mysql',
     logging: false
 });
