@@ -23,13 +23,16 @@ const makeAbm = (app, ruta, entidad, atributos, include) => {
 app.use(bodyParser.json());
 app.use(cors());
 app.listen(port, () => console.log(`El buen sabor corriendo en el puerto ${port}!`));
-//Configuracion de sequelize
-let sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
-    host: process.env.DATABASE_URL || "localhost",
-    dialect: 'mysql',
-    logging: false
-});
-
+if (process.env.JAWSDB_URL) {
+    sequelize = new Sequelize(process.env.JAWSDB_URL);
+} else {
+    //Configuracion de sequelize
+    let sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
+        host: "localhost",
+        dialect: 'mysql',
+        logging: false
+    });
+}
 sequelize.authenticate().then(() => {
     console.log("Conectado a la base de datos con exito!");
 }).catch((e) => {
@@ -123,7 +126,7 @@ ArticuloManufacturadoDetalle.belongsTo(Articulo, { foreignKey: 'idArticulo' });
 RubroArticulo.hasMany(Articulo, { foreignKey: 'idRubroArticulo' });
 
 //Actualiza la tablas de la base de datos para que queden acorde a los modelos
-sequelize.sync({ alter: true,force:true });
+sequelize.sync({ alter: true, force: true });
 
 //Rutas (no creo que sirva para todos los casos, pero puede ahorrar mucho tiempo)
 makeAbm(app, '/rubro-articulo', RubroArticulo, ['denominacion']);
@@ -325,7 +328,7 @@ app.post('/reportes/pedidos/periodo', (req, res) => {
 
 app.post('/reportes/pedidos/cliente', (req, res) => {
     let desde = req.body.desde, hasta = req.body.hasta;
-    sequelize.query(`SELECT count(pedidos.id) as pedidos,fecha, clientes.nombre,clientes.apellido from pedidos INNER JOIN clientes ON clientes.id = pedidos.idCliente  ${(desde != "" && hasta != "" ? `WHERE fecha BETWEEN '${desde}' AND '${hasta}'` : `` )} group by idCliente ORDER by idCliente ASC`, { type: Sequelize.QueryTypes.SELECT }).then(data => {
+    sequelize.query(`SELECT count(pedidos.id) as pedidos,fecha, clientes.nombre,clientes.apellido from pedidos INNER JOIN clientes ON clientes.id = pedidos.idCliente  ${(desde != "" && hasta != "" ? `WHERE fecha BETWEEN '${desde}' AND '${hasta}'` : ``)} group by idCliente ORDER by idCliente ASC`, { type: Sequelize.QueryTypes.SELECT }).then(data => {
         res.json(data)
     });
 })
