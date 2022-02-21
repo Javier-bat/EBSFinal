@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.listen(port, () => console.log(`El buen sabor corriendo en el puerto ${port}!`));
 if (process.env.JAWSDB_URL) {
-    sequelize = new Sequelize(process.env.JAWSDB_URL);
+    let sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
     //Configuracion de sequelize
     let sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
