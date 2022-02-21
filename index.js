@@ -23,6 +23,8 @@ const makeAbm = (app, ruta, entidad, atributos, include) => {
 app.use(bodyParser.json());
 app.use(cors());
 app.listen(port, () => console.log(`El buen sabor corriendo en el puerto ${port}!`));
+
+let sequelize = "";
 if (process.env.JAWSDB_URL) {
     let sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
