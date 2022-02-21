@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "el-buen-sabor",
   "version": "1.0.0",
   "description": "Backend para el sistema del buen sabor",

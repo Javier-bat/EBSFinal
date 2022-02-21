@@ -6,13 +6,13 @@ import cors from 'cors'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import expressJwt from 'express-jwt'
+import * as path from 'path';
 
 const app = express();
 const dbName = process.env.DB_NAME || 'buensabor';
 const dbUsername = process.env.DB_USER || 'root';
 const dbPassword = process.env.DB_PW || '';
 const port = process.env.PORT || 5000;
-const path = require('path')
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, '../frontend/build')))
