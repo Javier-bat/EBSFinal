@@ -29,7 +29,7 @@ const makeAbm = (app, ruta, entidad, atributos, include) => {
 app.use(bodyParser.json());
 app.use(cors());
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../frontend/src')))
+//app.use(express.static(path.join(__dirname, '../frontend/src')))
 app.listen(port, () => console.log(`El buen sabor corriendo en el puerto ${port}!`));
 
 //Configuracion de sequelize
