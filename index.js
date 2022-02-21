@@ -24,17 +24,17 @@ app.use(bodyParser.json());
 app.use(cors());
 app.listen(port, () => console.log(`El buen sabor corriendo en el puerto ${port}!`));
 
-let sequelize = "";
+//Configuracion de sequelize
+let sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
+    host: "localhost",
+    dialect: 'mysql',
+    logging: false
+});
+
 if (process.env.JAWSDB_URL) {
     let sequelize = new Sequelize(process.env.JAWSDB_URL);
-} else {
-    //Configuracion de sequelize
-    let sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
-        host: "localhost",
-        dialect: 'mysql',
-        logging: false
-    });
 }
+
 sequelize.authenticate().then(() => {
     console.log("Conectado a la base de datos con exito!");
 }).catch((e) => {
