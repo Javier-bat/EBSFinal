@@ -8,9 +8,9 @@ import jwt from 'jsonwebtoken'
 import expressJwt from 'express-jwt'
 
 const app = express();
-const dbName = 'buensabor';
-const dbUsername = 'root';
-const dbPassword = '';
+const dbName = process.env.DB_NAME || 'buensabor';
+const dbUsername = process.env.DB_USER || 'root';
+const dbPassword = process.env.DB_PW || '';
 const port = process.env.PORT || 5000;
 
 const makeAbm = (app, ruta, entidad, atributos, include) => {
