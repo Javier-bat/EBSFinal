@@ -11,11 +11,7 @@ const app = express();
 const dbName = 'buensabor';
 const dbUsername = 'root';
 const dbPassword = '';
-const port = 3000;
-const path = require('path')
-
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../frontend/build')))
+const port = process.env.PORT || 5000;
 
 const makeAbm = (app, ruta, entidad, atributos, include) => {
     Helper.get(app, ruta, entidad, include);
@@ -383,12 +379,6 @@ app.get('/pedido/:id', (req, res) => {
         res.json(data)
     });
 });
-
-// AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/../frontend/build/index.html'))
-})
-
 
 
 

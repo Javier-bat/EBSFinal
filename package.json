@@ -1,17 +1,14 @@
 {
-  "name": "elbuensabor",
+  "type": "module",
+  "name": "el-buen-sabor",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend para el sistema del buen sabor",
   "main": "index.js",
-  "engines": {
-    "node": "14.15.1"
-  },
   "scripts": {
-    "frontend": "cd frontend && npm start",
-    "api": "cd api && nodemon app.js",
-    "dev": "npm run api && npm run frontend",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "start": "nodemon index.js -e js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
