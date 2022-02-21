@@ -10,8 +10,19 @@
     "frontend": "cd frontend && npm start",
     "api": "cd api && nodemon app.js",
     "dev": "npm run api && npm run frontend",
-    "heroku-postbuild": "cd frontend && npm install && npm run ng serve"
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7",
+    "sequelize": "^6.4.0"
+  }
 }
