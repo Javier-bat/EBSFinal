@@ -9,7 +9,7 @@
     <div class="modal-body">
         <form [formGroup]="formularioRubro" (ngSubmit)="submitRubro(c)">
             <div class="form-group">
-                <label for="calle">Denominacion</label>
+                <label for="calle">Rubro</label>
                 <input class="form-control" formControlName="denominacion">
             </div>
             <div id="error" class="mb-3 red">{{errorRubro}}</div>
@@ -29,7 +29,7 @@
     <div class="modal-body">
         <form [formGroup]="formularioArticulo" (ngSubmit)="submitArticulo(c)">
             <div class="form-group">
-                <label for="calle">Denominacion</label>
+                <label for="calle">Rubro</label>
                 <select class="form-control" formControlName="idRubroArticulo">
                     <option value="">Seleccione un Valor</option>
                     <ng-container *ngFor="let rubro of rubros; index as i">
