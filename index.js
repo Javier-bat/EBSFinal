@@ -17,7 +17,7 @@ const app = express();
 const dbName = 'buensabor';
 const dbUsername =  'root';
 const dbPassword =  '';
-const port = process.env.PORT || 5000;
+const port = 3000;
 
 const makeAbm = (app, ruta, entidad, atributos, include) => {
     Helper.get(app, ruta, entidad, include);
